@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Manager</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+            color: white;
+            padding: 120px 20px;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.6);
+            padding: 50px;
+            border-radius: 10px;
+        }
+
+        .card {
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+        }
+
+        .btn-custom {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔝 Navbar -->
+<nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand">🍽️ Restaurant Manager</span>
+
+    <div>
+        <a href="/login/" class="btn btn-light">Login</a>
+        <a href="/logout/" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
+<!-- 🔥 Hero Section -->
+<div class="hero">
+    <div class="overlay text-center">
+        <h1 class="mb-3">Bienvenue dans Restaurant Manager</h1>
+        <p class="mb-4">Gérez votre restaurant facilement et efficacement</p>
+
+        <a href="/menu/" class="btn btn-warning btn-custom">Menu</a>
+        <a href="/tables/" class="btn btn-primary btn-custom">Tables</a>
+        <a href="/orders/" class="btn btn-success btn-custom">Commandes</a>
+        <a href="/add-order/" class="btn btn-light btn-custom">➕ Ajouter Commande</a>
+    </div>
+</div>
+
+<!-- 📊 Statistiques -->
+<div class="container mt-5">
+    <div class="row text-center">
+
+        <div class="col-md-3">
+            <div class="card stat-card p-3 shadow">
+                <h3>{{ menus_count }}</h3>
+                <p>Menus</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card stat-card p-3 shadow">
+                <h3>{{ tables_count }}</h3>
+                <p>Tables</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card stat-card p-3 shadow">
+                <h3>{{ orders_count }}</h3>
+                <p>Commandes</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card stat-card p-3 shadow">
+                <h3>{{ revenue }} DT</h3>
+                <p>Revenu</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 🎯 Sections principales -->
+<div class="container mt-5">
+    <div class="row text-center">
+
+        <!-- Menu -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow">
+                <h3>🍔 Menu</h3>
+                <p>Gérer les plats</p>
+                <a href="/menu/" class="btn btn-warning">Voir</a>
+            </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow">
+                <h3>🪑 Tables</h3>
+                <p>Gérer les tables</p>
+                <a href="/tables/" class="btn btn-primary">Voir</a>
+            </div>
+        </div>
+
+        <!-- Commandes -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow">
+                <h3>📋 Commandes</h3>
+                <p>Gérer les commandes</p>
+                <a href="/orders/" class="btn btn-success">Voir</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 📌 Footer -->
+<footer class="text-center mt-5 p-3 bg-dark text-white">
+    © 2026 Restaurant Manager | Projet Django
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-5">
+    <h3 class="text-center">Statistiques</h3>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Menus', 'Tables', 'Commandes'],
+            datasets: [{
+                label: 'Nombre',
+                data: [{{ menus_count }}, {{ tables_count }}, {{ orders_count }}],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+</body>
+</html>

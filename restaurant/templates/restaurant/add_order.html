@@ -1,0 +1,23 @@
+<h2>Ajouter Commande</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <label for="table">Table:</label>
+    <select name="table" id="table" required>
+        <option value="">-- Choisir une table --</option>
+        {% for table in tables %}
+            <option value="{{ table.id }}">{{ table }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label>Menus:</label><br>
+    {% for menu in menus %}
+        <input type="checkbox" name="items" value="{{ menu.id }}">
+        {{ menu }}<br>
+    {% endfor %}
+    <br>
+
+    <button type="submit">Ajouter</button>
+</form>
